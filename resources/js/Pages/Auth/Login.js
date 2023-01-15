@@ -7,8 +7,8 @@ import TextInput from '@/Shared/TextInput';
 
 export default () => {
   const { data, setData, errors, post, processing } = useForm({
-    email: 'johndoe@example.com',
-    password: 'secret',
+    email: '',
+    password: '',
     remember: true
   });
 
