@@ -12,7 +12,27 @@ const path = require('path');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.options({
+        minimize:true,
+        optimization: {
+            minimize: false,
+        },
+        uglify: {
+            uglifyOptions: {
+                warnings: false,
+                comments: false,
+                beautify: true,
+                minify: true,
+                minimize: true,
+                compress: {
+                drop_console: true,
+                minimize: true,
+                }
+            }
+        },
+        cssnano:true,
+    })
+    .js('resources/js/app.js', 'public/js')
     .react()
     .postCss('resources/css/app.css', 'public/css/app.css', [
         require('postcss-import'),

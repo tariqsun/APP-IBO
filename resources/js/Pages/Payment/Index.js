@@ -105,7 +105,12 @@ const Index = () => {
                   </InertiaLink>
                 </td>
                 <td className="border-t">
-                    <WhatsLink amount="1000" contact="0232" due_date="0322" />
+                    {customer?.phone_number ? (
+                        <WhatsLink amount={balance} contact={customer.phone_number} due_date={due_date} />
+                    ):(
+                        <span className='text-red-700'>customer phone number is null</span>
+
+                    )}
                 </td>
 
                 <td className="w-px border-t">

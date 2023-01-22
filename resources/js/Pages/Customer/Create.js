@@ -92,11 +92,11 @@ const Create = () => {
             <TextInput
               className="w-full pb-8 pr-6 lg:w-1/2"
               label="Phone"
-              name="phone"
+              name="phone_number"
               type="text"
-              errors={errors.phone}
-              value={data.phone}
-              onChange={e => setData('phone', e.target.value)}
+              errors={errors.phone_number}
+              value={data.phone_number}
+              onChange={e => setData('phone_number', e.target.value)}
             />
             <TextInput
               className="w-full pb-8 pr-6 lg:w-1/2"

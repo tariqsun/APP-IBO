@@ -9,6 +9,7 @@ use App\Http\Resources\CustomerCollection;
 use App\Http\Resources\CustomerResource;
 use App\Http\Resources\PlanCollection;
 use App\Models\Plan;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
@@ -63,9 +64,20 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
-        Auth::user()->account->customers()->create(
+       $carbon = new Carbon($request->start_date);
+       $customer = Auth::user()->account->customers()->create(
             $request->validated()
         );
+
+        $plan = Plan::where('id', $request->plan_id)->first();
+
+        $customer->payments()->create([
+            'balance'=>$plan->price,
+            'start_date'=>$carbon->format('Y-m-d H:i:s'),
+            'due_date'=>$carbon->addMonth()->format('Y-m-d H:i:s'),
+            'account_id'=>auth()->user()->id,
+            'status'=>0
+        ]);
 
         return Redirect::route('customers')->with('success', 'Customer created.');
     }

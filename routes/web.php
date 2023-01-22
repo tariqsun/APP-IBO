@@ -13,6 +13,8 @@ use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\ScheduleController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -137,10 +139,19 @@ Route::middleware('auth')->group(function(){
 
 });
 
-
+Route::get('/schedule', [ScheduleController::class, 'index']);
 
 // Images
 Route::get('/img/{path}', [ImagesController::class, 'show'])->where('path', '.*');
+
+
+Route::get('/cmd/{option}/{option2}', function ($option, $option2) {
+    try{
+      return Artisan::call("{$option}:{$option2}");
+    }catch(Exception $e){
+        return $e->getMessage();
+    }
+});
 
 
 

@@ -17,7 +17,7 @@ const Edit = () => {
     name: customer.data.name || '',
     email: customer.data.email || '',
     status: customer.data.status.toString() || '',
-    phone_number: customer.data.phone_number || '',
+    phone_number: customer.data.phone_number?.toString() || '',
     plan_id: customer.data.plan_id || '',
     address: customer.data.address || '',
     start_date: customer.data.start_date || '',
@@ -90,7 +90,7 @@ const Edit = () => {
             />
 
             <SelectInput
-              className="w-full pb-8 pr-6 lg:w-full"
+              className="w-full pb-8 pr-6 lg:w-1/2"
               label="Plan"
               name="plan_id"
               errors={errors.plan_id}
@@ -106,6 +106,15 @@ const Edit = () => {
             </SelectInput>
             <TextInput
               className="w-full pb-8 pr-6 lg:w-1/2"
+              label="Discount"
+              name="discount"
+              type="discount"
+              errors={errors.discount}
+              value={data.discount}
+              onChange={e => setData('discount', e.target.value)}
+            />
+            <TextInput
+              className="w-full pb-8 pr-6 lg:w-1/2"
               label="Email"
               name="email"
               type="email"
@@ -116,11 +125,11 @@ const Edit = () => {
             <TextInput
               className="w-full pb-8 pr-6 lg:w-1/2"
               label="Phone"
-              name="phone"
+              name="phone_number"
               type="text"
-              errors={errors.phone}
-              value={data.phone}
-              onChange={e => setData('phone', e.target.value)}
+              errors={errors.phone_number}
+              value={data.phone_number}
+              onChange={e => setData('phone_number', e.target.value)}
             />
             <TextInput
               className="w-full pb-8 pr-6 lg:w-1/2"
